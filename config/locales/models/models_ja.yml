@@ -16,6 +16,7 @@ ja:
           created_at: 作成日
           updated_at: 更新日
           employee_number: 社員番号
+          uid: カードID
         attendance:
           worked_on: 日付
           started_at: 出勤時間
