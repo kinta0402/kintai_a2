@@ -5,5 +5,9 @@ class BasesController < ApplicationController
   end
   
   def new
+    @base = Base.new
+  end
+  
+  def index
   end
 end
