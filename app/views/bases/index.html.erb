@@ -14,13 +14,19 @@
     </thead>
     
     <tbody>
+      <% @bases.each do |base| %>
         <tr>
           <td></td>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><%= base.base_number %></td>
+          <td><%= base.base_name %></td>
+          <td><%= base.attendance_type %></td>
         </tr>
+      <% end %>
     </tbody>
   </table>
+</div>
+
+<div class="center">
+<%= link_to "拠点情報追加", new_basis_path, class: "btn btn-lg btn-primary" %>
 </div>
