@@ -22,7 +22,7 @@ class BasesController < ApplicationController
     end
   end
 
-  
+
   private
   
     def base_params
