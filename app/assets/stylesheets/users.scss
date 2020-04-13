@@ -51,6 +51,18 @@
   }  
 }
 
+/* 出勤中社員一覧ページ */
+#table-attendance-index {
+  th {
+    vertical-align: middle;
+    text-align: center;
+  }
+  td {
+    vertical-align: middle;
+    text-align: center;
+  }
+}
+
 /* 基本情報編集モーダルウインドウ */
 
 .label-basic-info {

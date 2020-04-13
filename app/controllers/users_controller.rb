@@ -73,6 +73,9 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
+  def attendance_index
+  end
+  
   private
 
     def user_params # 5.5.3

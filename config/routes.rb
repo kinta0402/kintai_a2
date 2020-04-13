@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     end
     resources :attendances, only: :update
   end
-  
+
+  get '/user/attendance_index', to: 'users#attendance_index'
   resources :bases
 end
