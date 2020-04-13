@@ -16,8 +16,11 @@
     <tbody>
       <% @bases.each do |base| %>
         <tr>
-          <td><%= link_to "編集",edit_basis_path(base), class: "btn btn-lg btn-primary" %></td>
-          <td></td>
+          <td><%= link_to "編集", edit_basis_path(base), class: "btn btn-lg btn-primary" %></td>
+          <td><%= link_to "削除", base, method: :delete,
+                  data: { confirm: "削除してよろしいですか？" },
+                  class: "btn btn-lg btn-danger" %>
+          </td>
           <td><%= base.base_number %></td>
           <td><%= base.base_name %></td>
           <td><%= base.attendance_type %></td>

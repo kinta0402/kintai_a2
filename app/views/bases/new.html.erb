@@ -14,7 +14,12 @@
       <%= f.text_field :base_name, class: "form-control" %>
 
       <%= f.label :attendance_type, class: "label-#{yield(:class_text)}" %>
-      <%= f.text_field :attendance_type, class: "form-control" %>
+
+      <select class="form-control" name="base[attendance_type]">
+        <option value="">選択してください</option>
+        <option value="出勤">出勤</option>
+        <option value="退勤">退勤</option>
+      </select>
 
       <%= f.submit "拠点情報追加", class: "btn btn-primary btn-block btn-new" %>
     <% end %>

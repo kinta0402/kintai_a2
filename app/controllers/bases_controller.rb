@@ -1,7 +1,9 @@
 class BasesController < ApplicationController
+  before_action :logged_in_user
+  before_action :admin_user
   
   def index
-    @bases = Base.all
+    @bases = Base.all.order(:base_number)
   end
 
   def new
@@ -30,6 +32,13 @@ class BasesController < ApplicationController
     else
       render :edit
     end
+  end
+  
+  def destroy
+    @base = Base.find(params[:id])
+    @base.destroy
+    flash[:success] = "拠点番号 #{@base.base_number} のデータを削除しました。"
+    redirect_to bases_url
   end
 
 
