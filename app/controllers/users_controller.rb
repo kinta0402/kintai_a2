@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: [:index, :destroy, :edit_basic_info, :update_basic_info]
+  before_action :admin_user, only: [:index, :destroy, :edit_basic_info, :update_basic_info, :attendance_index]
   before_action :set_one_month, only: :show
   before_action :admin_or_correct_user, only: :show # 勤怠B仕様書 no.10の為自分で追加
   
@@ -73,7 +73,10 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
+  # 出勤中社員一覧ページ
   def attendance_index
+    @users = User.all
+    # @users = User.all.includes(:attendances) ← これでなくても、問題無し!?
   end
   
   private
