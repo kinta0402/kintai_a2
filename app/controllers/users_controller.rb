@@ -79,6 +79,9 @@ class UsersController < ApplicationController
     # @users = User.all.includes(:attendances) ← これでなくても、問題無し!?
   end
   
+  def modifying_basic_info
+  end
+  
   private
 
     def user_params # 5.5.3

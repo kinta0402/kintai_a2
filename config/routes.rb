@@ -20,5 +20,6 @@ Rails.application.routes.draw do
   end
 
   get '/user/attendance_index', to: 'users#attendance_index'
+  get 'modifying_basic_info', to: 'users#modifying_basic_info'
   resources :bases
 end
