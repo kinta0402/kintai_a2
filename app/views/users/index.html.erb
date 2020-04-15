@@ -32,8 +32,12 @@
       </div>
       <% if current_user.admin? && !current_user?(user) %>
         <div class="jumbotron">
-        
-          <%= link_to "編集", edit_basic_info_user_path(user), remote: true, class: "btn btn-success" %>
+          <a date-toggle="collapse" href="#collapse<%= user.id %>"><button type="submit" class="btn btn-lg btn-primary">編集</button></a>
+        </div>
+        <div id="collapse<%=user.id %>" class="collapse">
+          <ul class="list-group">
+            <%= render "user", {user: @user} %>
+          </ul>
         </div>
       <% end %>
 
