@@ -16,36 +16,26 @@
   <% end %>
 
 <div class="col-md-10 col-md-offset-1">
-  <%= will_paginate %>
+  
    <div>
     <% @users.each do |user| %>
      <div>
-       <% if current_user.admin? && !current_user?(user) %>
          <%= user.name %>
-       <% end %>
      </div>
       <div>
-        <% if current_user.admin? && !current_user?(user) %>
          <span style ="font-weight:bold">|&nbsp;</span>
            <%= link_to "削除", user, method: :delete, data: { confirm: "削除してよろしいですか？" }, class: "btn btn-danger" %>
-        <% end %>
       </div>
-      <% if current_user.admin? && !current_user?(user) %>
         <div class="jumbotron">
-          <a date-toggle="collapse" href="#collapse<%= user.id %>"><button type="submit" class="btn btn-lg btn-primary">編集</button></a>
+          <a data-toggle="collapse" href="#collapse<%= user.id %>"><button type="submit" class="btn btn-lg btn-primary">編集</button></a>
+            <div id="collapse<%= user.id %>" class="panel-collapse collapse">
+                <%= render "user", {user: user} %>
+            </div>
         </div>
-        <div id="collapse<%=user.id %>" class="collapse">
-          <ul class="list-group">
-            <%= render "user", {user: @user} %>
-          </ul>
-        </div>
-      <% end %>
-
-
     <% end %>
   </div>
   <%= will_paginate %>
 </div>
 
 <!--モーダルウインドウ表示-->
-<div id="edit-basic-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<!--<div id="edit-basic-info" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>-->
