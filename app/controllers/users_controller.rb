@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
-  #before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
-  #before_action :correct_user, only: [:edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
+  before_action :correct_user, only: [:edit, :update]
   before_action :admin_user, only: [:index, :destroy, :edit_basic_info, :update_basic_info, :attendance_index, :modifying_basic_info]
   before_action :set_one_month, only: :show
   before_action :admin_or_correct_user, only: :show # 勤怠B仕様書 no.10の為自分で追加
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       flash[:success] = "ユーザー情報を更新しました。"
       redirect_to @user
     else
-      render :edit      
+      render :edit    
     end
   end
   
@@ -70,6 +70,8 @@ class UsersController < ApplicationController
   def update_basic_info
     if @user.update_attributes(basic_info_params)
       flash[:success] = "#{@user.name}の基本情報を更新しました。"
+    elsif @user.name == ""
+      flash[:danger] = "更新は失敗しました。<br>名前を入力してください。"
     else
       flash[:danger] = "#{@user.name}の更新は失敗しました。<br>" + @user.errors.full_messages.join("<br>")
     end
