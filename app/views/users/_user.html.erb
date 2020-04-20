@@ -1,6 +1,7 @@
+<% provide(:class_text, 'basic-info') %>
+
 <%= form_with(model: user, url: update_basic_info_user_path(user), local: true, method: :patch) do |f| %>
 
-  
   <%= f.label :name, class: "label-#{yield(:class_text)}" %>
   <%= f.text_field :name, class: "form-control" %>
   
@@ -19,9 +20,6 @@
   <%= f.label :password, "パスワード", class: "label-#{yield(:class_text)}" %>
   <%= f.password_field :password, class: 'form-control' %>
   
-  <%= f.label :basic_time, class: "label-#{yield(:class_text)}" %>
-  <%= f.time_field :basic_time, class: "form-control" %>
-
   <%= f.label :work_time, class: "label-#{yield(:class_text)}" %>
   <%= f.time_field :work_time, class: "form-control" %>
   
