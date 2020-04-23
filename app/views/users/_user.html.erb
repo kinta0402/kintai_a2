@@ -29,5 +29,6 @@
   <%= f.label :designated_work_end_time, class: "label-#{yield(:class_text)}" %>
   <%= f.time_field :designated_work_end_time, class: "form-control" %>
   
-  <%= f.submit "更新", class: "btn btn-primary btn-#{yield(:class_text)}" %>
+  <%= f.submit "更新", class: "btn btn-primary btn-block" %>
+
 <% end %>
