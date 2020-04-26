@@ -6,17 +6,17 @@ User.create!(name: "管理者",
              password_confirmation: "password",
              admin: true)
              
-User.create!(name: "上長A",
-             email: "superior-1@email.com",
-             password: "password",
-             password_confirmation: "password",
-             superior: true)
+# User.create!(name: "上長A",
+#             email: "superior-1@email.com",
+#             password: "password",
+#             password_confirmation: "password",
+#             superior: true)
              
-User.create!(name: "上長B",
-             email: "superior-2@email.com",
-             password: "password",
-             password_confirmation: "password",
-             superior: true)
+# User.create!(name: "上長B",
+#             email: "superior-2@email.com",
+#             password: "password",
+#             password_confirmation: "password",
+#             superior: true)
 
 10.times do |n|
   name  = Faker::Name.name
