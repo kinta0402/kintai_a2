@@ -11,7 +11,7 @@ ja:
           email: メールアドレス
           affiliation: 所属
           basic_time: 基本時間
-          work_time: 基本勤務時間
+          basic_work_time: 基本勤務時間
           password: パスワード
           password_confirmation: パスワード再入力
           created_at: 作成日

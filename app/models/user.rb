@@ -15,7 +15,7 @@ class User < ApplicationRecord
   # validates :employee_number, length: { in: 1..4 }, allow_blank: true, uniqueness: true
   # validates :uid, length: { in: 1..4 }, allow_blank: true, uniqueness: true
   validates :basic_time, presence: true
-  validates :work_time, presence: true
+  validates :basic_work_time, presence: true
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
