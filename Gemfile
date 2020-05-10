@@ -17,6 +17,7 @@ gem 'jbuilder',     '~> 2.5'
 gem 'rounding'
 gem 'better_errors'
 gem 'binding_of_caller'
+gem 'roo'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'

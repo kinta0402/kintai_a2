@@ -13,6 +13,13 @@ class UsersController < ApplicationController
       @users = @users.get_by_name params[:name]
     end
   end
+
+  # CSVインポート
+  def import
+    # fileはtmpに自動で一時保存される
+    User.import(params[:file])
+    redirect_to users_url
+  end
   
   def show
     # 10.2

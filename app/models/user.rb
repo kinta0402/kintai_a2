@@ -61,5 +61,21 @@ class User < ApplicationRecord
       all #全て表示。User.は省略
     end
   end
-  
+
+  # CSV機能
+  def self.import(file)
+    CSV.foreach(file.path, headers: true, encoding: 'Shift_JIS:UTF-8') do |row|
+      # IDが見つかれば、レコードを呼び出し、見つかれなければ、新しく作成
+      user = find_by(id: row["id"]) || new
+      # CSVからデータを取得し、設定する
+      user.attributes = row.to_hash.slice(*updatable_attributes)
+      # 保存する
+      user.save
+    end
+  end
+
+  # CSV機能 更新を許可するカラムを定義
+  def self.updatable_attributes
+    ["id", "name", "email", "affiliation", "password", "basic_work_time"]
+  end
 end

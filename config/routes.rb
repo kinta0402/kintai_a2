@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       patch 'attendances/update_one_month'
     end
     resources :attendances, only: :update
+    collection { post :import } # CSVインポート
   end
 
   get '/user/attendance_index', to: 'users#attendance_index'
