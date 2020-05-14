@@ -2,15 +2,28 @@
 <div>
   <table class="table table-bordered table-condensed user-table">
     <tr>
-      <td>【<%= l(@first_day, format: :middle) %>】勤怠管理表</td>
-      <td>指定勤務時間：<%= format_basic_info(@user.basic_work_time) %></td>
-      <td>基本時間：<%= format_basic_info(@user.basic_time) %></td>
+      <td>
+        <%= link_to "←", user_path(date: @first_day.prev_month),
+                         class: "btn btn-xs btn-primary" %>
+        &emsp;
+        【<%= l(@first_day, format: :middle) %>】勤怠管理表
+        &emsp;
+        <%= link_to "→", user_path(date: @first_day.next_month),
+                         class: "btn btn-xs btn-primary" %>
+      </td>
+      <td>
+        指定勤務時間：<%= format_basic_info(@user.basic_work_time) %><br>
+        テスト : XXX
+      </td>
+      <td colspan="3">基本時間：<%= format_basic_info(@user.basic_time) %></td>
       <td>月初日：<%= l(@first_day, format: :short) %></td>
     </tr>
 
     <tr>
       <td>所属：<%= @user.affiliation.present? ? @user.affiliation : "未所属" %></td>
       <td>名前：<%= @user.name %></td>
+      <td>コード</td>
+      <td>110</td>
       <td>出勤日数：<%= @worked_sum %>日</td>
       <td>月末日：<%= l(@last_day, format: :short) %></td>
     </tr>
