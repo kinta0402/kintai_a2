@@ -1,29 +1,18 @@
+<!--編集前のshowコード-->
+
 <% provide(:title, @user.name) %>
 <div>
   <table class="table table-bordered table-condensed user-table">
     <tr>
-      <td>
-        <%= link_to "←", user_path(date: @first_day.prev_month),
-                         class: "btn btn-xs btn-primary" %>
-        &emsp;
-        【<%= l(@first_day, format: :middle) %>】勤怠管理表
-        &emsp;
-        <%= link_to "→", user_path(date: @first_day.next_month),
-                         class: "btn btn-xs btn-primary" %>
-      </td>
-      <td>
-        指定勤務時間：<%= format_basic_info(@user.basic_work_time) %><br>
-        テスト : XXX
-      </td>
-      <td colspan="3">基本時間：<%= format_basic_info(@user.basic_time) %></td>
+      <td>【<%= l(@first_day, format: :middle) %>】勤怠管理表</td>
+      <td>指定勤務時間：<%= format_basic_info(@user.basic_work_time) %></td>
+      <td>基本時間：<%= format_basic_info(@user.basic_time) %></td>
       <td>月初日：<%= l(@first_day, format: :short) %></td>
     </tr>
 
     <tr>
       <td>所属：<%= @user.affiliation.present? ? @user.affiliation : "未所属" %></td>
       <td>名前：<%= @user.name %></td>
-      <td>コード</td>
-      <td>(^^)</td>
       <td>出勤日数：<%= @worked_sum %>日</td>
       <td>月末日：<%= l(@last_day, format: :short) %></td>
     </tr>
@@ -37,23 +26,16 @@
 </div>
 
 <div>
-  <table class = "table-bordered table-striped table-condensed">
+  <table class="table table-bordered table-condensed table-hover" id="table-attendances">
     <thead>
-      <tr> <!--rowspan:縦結合、colspan：横結合-->
-        <th rowspan = "2">日付</th>
-        <th rowspan = "2">曜日</th>
-        <th colspan = "3">出社</th>
-        <th colspan = "3">退社</th>
-        <th rowspan = "2">在社時間</th>
-        <th rowspan = "2">備考</th>
-      </tr>
       <tr>
-        <th>時</th>
-        <th>分</th>
-        <th></th>
-        <th>時</th>
-        <th>分</th>
-        <th></th>
+        <th>日付</th>
+        <th>曜日</th>
+        <th>勤怠登録</th>
+        <th>出勤時間</th>
+        <th>退勤時間</th>
+        <th>在社時間</th>
+        <th>備考</th>
       </tr>
     </thead>
 
@@ -73,12 +55,18 @@
               <%= $days_of_the_week[day.worked_on.wday] %>
             <% end %>
           </td>
-          <td><%= l(day.started_at, format: "%H") if day.started_at.present? %></td>
-          <td><%= l(day.started_at.floor_to(15.minutes), format: "%M") if day.started_at.present? %></td>
-          <td></td>
-          <td><%= l(day.finished_at, format: "%H") if day.finished_at.present? %></td>
-          <td><%= l(day.finished_at.floor_to(15.minutes), format: "%M") if day.finished_at.present? %></td>
-          <td></td>
+          <td>
+            <%# if (Date.current == day.worked_on) && day.started_at.nil? 10.6 %>
+              <%#= link_to "出勤登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
+            <%# elsif (Date.current == day.worked_on) && day.started_at.present? day.finished_at.nil? %>
+              <%#= link_to "退勤登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
+            <%# end %>
+            <% if btn_text = attendance_state(day) %> <!-- 10.6.1 -->
+              <%= link_to "#{btn_text}登録", user_attendance_path(@user, day), method: :patch, class: "btn btn-primary btn-attendance" %>
+            <% end %>
+          </td>
+          <td><%= l(day.started_at.floor_to(15.minutes), format: :time) if day.started_at.present? %></td>
+          <td><%= l(day.finished_at.floor_to(15.minutes), format: :time) if day.finished_at.present? %></td>
           <td>
             <%# if day.started_at.present? && day.finished_at.present? %>
               <%#= working_times(day.started_at, day.finished_at) %> <!-- 10.8 -->
