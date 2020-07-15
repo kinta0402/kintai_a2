@@ -31,7 +31,7 @@
   <%= will_paginate %>
   <div>
     <% @users.each do |user| %>
-      <% if current_user.admin? && !current_user?(user) %>
+      <% if current_user.admin? && !current_user?(user) %> <%# 8.5.2 #%>
         <div>
           <%= user.name %>
         </div>

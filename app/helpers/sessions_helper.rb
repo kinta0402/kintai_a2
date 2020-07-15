@@ -1,6 +1,7 @@
 module SessionsHelper
   
-  # 引数に渡されたユーザーオブジェクトでログインします。
+  # 引数に渡されたユーザーオブジェクトでログインします。6.3.1
+  # user.id を 一時的セッションに記憶するメソッド
   def log_in(user)
     session[:user_id] = user.id
   end
@@ -36,9 +37,9 @@ module SessionsHelper
     @current_user = nil
   end
 
-  # 一時的セッションにいるユーザーを返します。
+  # 一時的セッションにいるユーザーを返します。6.3.2
   # それ以外の場合はcookiesに対応するユーザーを返します。
-  # remember_me でややこしくなっている
+  # remember_me でややこしくなっている ※下記ｺﾒﾝﾄｱｳﾄ＝元のやつ →分かりやすい!!
   def current_user
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
@@ -70,7 +71,7 @@ module SessionsHelper
   #    end
   #  end
   
-  # 渡されたユーザーがログイン済みのユーザーであればtrueを返します。
+  # 渡されたユーザーがログイン済みのユーザーであればtrueを返します。8.2.2
   def current_user?(user)
     user == current_user
   end  

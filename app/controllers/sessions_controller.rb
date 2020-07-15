@@ -4,9 +4,9 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      log_in user
+    user = User.find_by(email: params[:session][:email].downcase) # 6.2.2 
+    if user && user.authenticate(params[:session][:password]) # 6.2.2
+      log_in user # メソッド→session helperにて定義
       params[:session][:remember_me] == '1' ? remember(user) : forget(user) #remember me 三項演算子を使用 7.3
       # redirect_to user ↓へ
       redirect_back_or user # ﾌﾚﾝﾄﾞﾘｰﾌｫﾜｰﾃﾞｨﾝｸﾞ8.3

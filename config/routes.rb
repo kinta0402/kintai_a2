@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :users do
-    member do
+    member do # memberブロック 9.3.1 URLに:idを含める事が出来るのか？
       get 'edit_basic_info'
       patch 'update_basic_info'
       get 'attendances/edit_one_month'

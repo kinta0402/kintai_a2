@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   before_action :admin_or_correct_user, only: :show # 勤怠B仕様書 no.10の為自分で追加
   
   
-  def index
+  def index # 8.4
     @users = User.paginate(page: params[:page]).search(params[:search])
     if params[:name].present?
       @users = @users.get_by_name params[:name]
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     # 10.2
     # @first_day = Date.current.beginning_of_month  10.3 → application_contにて定義の為
     # @last_day = @first_day.end_of_month
-    @worked_sum = @attendances.where.not(started_at: nil).count # 10.7
+    @worked_sum = @attendances.where.not(started_at: nil).count # 出勤日数 10.7
   end
   
   def new
@@ -50,11 +50,12 @@ class UsersController < ApplicationController
     end
   end
   
+  # 8.1
   def edit
     # @user = User.find(params[:id])
   end
   
-  # ユーザー情報更新
+  # ユーザー情報更新 # 8.1.2
   def update
     # @user = User.find(params[:id])
     if @user.update_attributes(user_params)
@@ -82,6 +83,7 @@ class UsersController < ApplicationController
       flash[:danger] = "更新は失敗しました。<br>名前を入力してください。"
     else
       flash[:danger] = "#{@user.name}の更新は失敗しました。<br>" + @user.errors.full_messages.join("<br>")
+      # ↑ 9.3.2
     end
     redirect_to users_url
   end
@@ -126,7 +128,7 @@ end
     #   @user = User.find(params[:id])
     # end
 
-    # # ログイン済みのユーザーか確認します。
+    # # ログイン済みのユーザーか確認します。8.2.1
     # def logged_in_user
     #   unless logged_in?
     #     store_location # ﾌﾚﾝﾄﾞﾘｰﾌｫﾜｰﾃﾞｨﾝｸﾞ
@@ -135,14 +137,14 @@ end
     #   end
     # end
     
-    # # アクセスしたユーザーが現在ログインしているユーザーか確認します。
+    # # アクセスしたユーザーが現在ログインしているユーザーか確認します。8.2.2
     # def correct_user
     #   # @user = User.find(params[:id])
     #   # redirect_to(root_url) unless @user == current_user ↓へ 8.2.2
     #   redirect_to(root_url) unless current_user?(@user)
     # end
     
-    # # システム管理権限所有かどうか判定します。
+    # # システム管理権限所有かどうか判定します。8.5.2
     # def admin_user
     #   redirect_to root_url unless current_user.admin?
     # end

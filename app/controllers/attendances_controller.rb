@@ -8,7 +8,7 @@ class AttendancesController < ApplicationController
   
   UPDATE_ERROR_MSG = "勤怠登録に失敗しました。やり直してください。"
 
-  def update
+  def update # 10.5.3
     @user = User.find(params[:user_id])
     @attendance = Attendance.find(params[:id])
     # 出勤時間が未登録であることを判定します。
@@ -31,8 +31,8 @@ class AttendancesController < ApplicationController
   def edit_one_month
   end
 
-  def update_one_month # テスト仕様書NO9.21により下記より変更
-    ActiveRecord::Base.transaction do
+  def update_one_month # テスト仕様書NO9.21により下記より変更 11.1.6
+    ActiveRecord::Base.transaction do # トランザクション 11.3.1
       if attendances_invalid? # attendances_helperにて定義
         attendances_params.each do |id, item|
           attendance = Attendance.find(id)
@@ -77,8 +77,9 @@ class AttendancesController < ApplicationController
     def admin_or_correct_user
       @user = User.find(params[:user_id]) if @user.blank?
       unless current_user?(@user) || current_user.admin?
+        # ↑OR演算子→どちらもfalseの場合は下記処理実行!?少しややこしい!!分からん!!n
         flash[:danger] = "編集権限がありません。"
         redirect_to(root_url)
-      end  
+      end
     end
 end
